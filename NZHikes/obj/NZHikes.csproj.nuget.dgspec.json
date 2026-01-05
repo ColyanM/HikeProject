@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\colya\\source\\repos\\HikingProject\\NZHikes\\NZHikes.csproj": {}
+    "C:\\Users\\colya\\source\\repos\\HikingProject\\nzhikes\\NZHikes.csproj": {}
   },
   "projects": {
-    "C:\\Users\\colya\\source\\repos\\HikingProject\\NZHikes\\NZHikes.csproj": {
+    "C:\\Users\\colya\\source\\repos\\HikingProject\\nzhikes\\NZHikes.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\colya\\source\\repos\\HikingProject\\NZHikes\\NZHikes.csproj",
+        "projectUniqueName": "C:\\Users\\colya\\source\\repos\\HikingProject\\nzhikes\\NZHikes.csproj",
         "projectName": "NZHikes",
-        "projectPath": "C:\\Users\\colya\\source\\repos\\HikingProject\\NZHikes\\NZHikes.csproj",
+        "projectPath": "C:\\Users\\colya\\source\\repos\\HikingProject\\nzhikes\\NZHikes.csproj",
         "packagesPath": "C:\\Users\\colya\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\colya\\source\\repos\\HikingProject\\NZHikes\\obj\\",
+        "outputPath": "C:\\Users\\colya\\source\\repos\\HikingProject\\nzhikes\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
