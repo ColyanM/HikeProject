@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 
 function DetailedHike() {
-  const { id } = useParams();
+  const { id } = useParams(); //pulled from URL
   const [hike, setHike] = useState(null);
   const [minutesTaken, setMinutesTaken] = useState("");
   const [notes, setNotes] = useState("");
@@ -25,7 +25,7 @@ function DetailedHike() {
   const handleComplete = (e) => {
 
     e.preventDefault();
-
+    //sends the hike o the completed hikes 
     fetch("http://localhost:5071/api/hikes/completed", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -49,7 +49,7 @@ function DetailedHike() {
       <p>Region: {hike.region}</p>
       <p>Distance: {hike.distance} km</p>
       <p>Elevation Gain: {hike.elevationGain} m</p>
-
+      {/* This shouldn't be needed because it doesn't show unless you login but just in case */}
       {isLoggedIn ? (
         <>
           <h2>Complete Hike</h2>

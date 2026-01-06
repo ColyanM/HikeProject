@@ -9,7 +9,7 @@ function Login() {
   const [message, setMessage] = useState("");
 
 
-
+//sends form to backend 
   async function handleLogin(e) {
     e.preventDefault();
 
@@ -29,12 +29,13 @@ function Login() {
       setMessage("Invalid login.");
       return;
     }
+    //takes the returned user object
     const user = await res.json();
     console.log("user", user);
 
 
     if (user && (user.id ?? user.Id)) { //used the && because it was letting everyone log in for some reason
-      localStorage.setItem("userId", user.id ?? user.Id);
+      localStorage.setItem("userId", user.id ?? user.Id); //stores so pages know who is logged in
       setMessage("Logged in.");
 
     } else {

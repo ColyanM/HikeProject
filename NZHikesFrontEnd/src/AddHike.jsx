@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 
 function AddHike() {
@@ -9,31 +10,33 @@ function AddHike() {
   const [createDistance, setCreateDistance] = useState("");
   const [createElevationGain, setCreateElevationGain] = useState("");
   const [message, setMessage] = useState("");
+  const navigate = useNavigate(); //allows the form to go back to the home page
 
 
-
+//form submission
   async function handleCreate(e) {
     e.preventDefault();
-
+//making a new hike object
     const newHike = {
       name: createName,
       region: createRegion,
       distance: Number(createDistance),
       elevationGain: Number(createElevationGain)
     };
-
+//post request to DB to make and add the object
     const res = await fetch("http://localhost:5071/api/hikes", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(newHike)
     });
-
+//Clears the form and displays success or failure
     if (res.ok) {
-      setMessage("Hike created successfully.");
+      // setMessage("Hike created successfully.");
       setCreateName("");
       setCreateRegion("");
       setCreateDistance("");
       setCreateElevationGain("");
+      navigate("/");
     } else {
       setMessage("Error creating hike.");
     }

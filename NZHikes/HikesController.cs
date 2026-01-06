@@ -11,7 +11,7 @@ public class HikesController : ControllerBase
         _db = context;
     }
 
-    // returns all hikes in the db currently
+    // returns all hikes in the db currently - displayed on home page
     [HttpGet]
     public ActionResult<IEnumerable<Hike>> GetHikes()
     {
@@ -19,7 +19,7 @@ public class HikesController : ControllerBase
     }
 
 
-    //return a specific hike based on id
+    //return a specific hike based on id when a hike is clicked
     [HttpGet("{id}")]
     public ActionResult<Hike> GetHike(int id)
     {
@@ -28,7 +28,7 @@ public class HikesController : ControllerBase
         return hike;
     }
 
-    //adds a new hike
+    //adds a new hike with info from front end form
     [HttpPost]
     public ActionResult<Hike> CreateHike([FromBody] Hike newHike)
     {
@@ -36,7 +36,7 @@ public class HikesController : ControllerBase
         _db.SaveChanges();
         return CreatedAtAction(nameof(GetHike), new { id = newHike.Id }, newHike);
     }
-    //doesn't have a check for multiple emails or white space
+    //doesn't have a check for multiple emails or white space if I have time I can review this
     [HttpPost("users/register")]
     public ActionResult<User> Register([FromBody] User user)
     {
@@ -45,6 +45,8 @@ public class HikesController : ControllerBase
         return user;
     }
 
+
+    //Takes the email and password and checks if a user is in the db
     [HttpPost("users/login")]
     public ActionResult<User> Login([FromBody] LoginRequest req)
     {
@@ -56,7 +58,7 @@ public class HikesController : ControllerBase
 
 
 
-
+    //Lists a hike as completed with the additional details and is added to the table
     [HttpPost("completed")]
     public ActionResult<CompletedHike> AddCompletedHike([FromBody] CompletedHike completed)
     {
@@ -65,12 +67,14 @@ public class HikesController : ControllerBase
         return completed;
     }
 
+    //same logic as displaying all hikes except it is filtered with just the user ID and displays the completed hike info
     [HttpGet("users/{userId}/completed")]
     public ActionResult<IEnumerable<CompletedHike>> GetCompletedForUser(int userId)
     {
         return _db.CompletedHikes.Where(ch => ch.UserId == userId).ToList();
     }
 
+    //same as above but from hikes table to get that info
     [HttpGet("users/{userId}/completed-hikes")]
     public ActionResult<IEnumerable<Hike>> GetCompletedHikesForUser(int userId)
     {
@@ -82,6 +86,7 @@ public class HikesController : ControllerBase
         return _db.Hikes.Where(h => hikeIds.Contains(h.Id)).ToList();
     }
 
+    //updates hike info. Currently no page for this 
     [HttpPut("{id}")]
     public IActionResult UpdateHike(int id, [FromBody] Hike updatedHike)
     {
@@ -97,6 +102,7 @@ public class HikesController : ControllerBase
         return NoContent();
     }
 
+    //Joins hike and completed hikes to pull all info
     [HttpGet("users/{userId}/completed-details")]
     public IActionResult GetCompletedDetailsForUser(int userId)
     {

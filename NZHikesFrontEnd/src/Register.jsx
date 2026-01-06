@@ -11,13 +11,13 @@ function Register() {
 
   async function handleCreate(e) {
     e.preventDefault();
-
+    //builds a new user object when they register
     const newUser = {
       name: createName,
       email: createEmail,
       password: createPassword
     };
-
+    //sends the new user object to be added
     const res = await fetch("http://localhost:5071/api/hikes/users/register", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -27,7 +27,7 @@ function Register() {
     if (res.ok) {
       localStorage.removeItem("userId"); //removes any lingering ID
       const createdUser = await res.json();       // lets me keep the user ID to use
-      localStorage.setItem("userId", createdUser.id);
+      localStorage.setItem("userId", createdUser.id); //stores ID in local memory
       setMessage("Registered successfully.");
       setCreateName("");
       setCreateEmail("");

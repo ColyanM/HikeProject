@@ -9,14 +9,14 @@ function HomePage() {
 
 
 
-
+  //gets all hikes in the hikes DB
   useEffect(() => {
     fetch("http://localhost:5071/api/hikes")
       .then(response => response.json())
       .then(data => setHikes(data))
       .catch(err => console.error("Error fetching hikes:", err));
   }, []);
-
+//UI is conditional on if they are logged in or not
   return (
     <div className="page">
       <div className="header-bar">
@@ -50,7 +50,8 @@ function HomePage() {
         <tbody>
           {hikes.map(hike => (
             <tr key={hike.id}>
-              <td><Link to={`/hikes/${hike.id}`}>{hike.name}</Link></td>
+              <td><Link to={`/hikes/${hike.id}`}>{hike.name}</Link></td> 
+              {/* Link to navigate to detailed view */}
               <td>{hike.region}</td>
               <td>{hike.distance}</td>
               <td>{hike.elevationGain}</td>

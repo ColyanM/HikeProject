@@ -8,11 +8,12 @@ builder.Services.AddOpenApi();
 
 builder.Services.AddControllers();
 
-
+//standard building the database but using MySQL insted of SQLite
 builder.Services.AddDbContext<ApplicationDb>(options =>
     options.UseMySql(builder.Configuration.GetConnectionString("DefaultConnection"),
     ServerVersion.AutoDetect(builder.Configuration.GetConnectionString("DefaultConnection"))));
 
+//lets react call API
 builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(policy =>

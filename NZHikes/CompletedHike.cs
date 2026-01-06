@@ -10,4 +10,4 @@ public class CompletedHike
 }
 
 
-//constructor for hike objects hat a user completed
+//constructor for hike objects hat a user completed, different from a hike because the date, mins and notes are added. Could research this for a better approach later to inherity the hike properties like java
