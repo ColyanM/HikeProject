@@ -8,7 +8,7 @@ function Stats() {
   const totalHikes = hikes.length;
   //Calculates totals to display 
   const totalMinutes = hikes.reduce((sum, h) => sum + (Number(h.minutesTaken) || 0), 0);
-  const totalDistance = hikes.reduce((sum, h) => sum + (Number(h.distance) || 0), 0);
+  const totalDistance = Math.round(hikes.reduce((sum, h) => sum + (Number(h.distance) || 0), 0), 2); //fixed an issue displaying dozens of 0s
   const totalElevation = hikes.reduce((sum, h) => sum + (Number(h.elevationGain) || 0), 0);
 
 

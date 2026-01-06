@@ -40,6 +40,7 @@ public class HikesController : ControllerBase
     [HttpPost("users/register")]
     public ActionResult<User> Register([FromBody] User user)
     {
+        user.Password = BCrypt.Net.BCrypt.HashPassword(user.Password);
         _db.Users.Add(user);
         _db.SaveChanges();
         return user;
@@ -50,8 +51,21 @@ public class HikesController : ControllerBase
     [HttpPost("users/login")]
     public ActionResult<User> Login([FromBody] LoginRequest req)
     {
+
+        if(!_db.Users.Any(u => u.Email == req.Email))
+        {
+            return Unauthorized("Invalid email or password");
+        }
+
+
         var existing = _db.Users
-            .FirstOrDefault(u => u.Email == req.Email && u.Password == req.Password);
+            .FirstOrDefault(u => u.Email == req.Email);
+
+
+        if(!BCrypt.Net.BCrypt.Verify(req.Password, existing.Password))
+        {
+            return Unauthorized("Invalid email or password");
+        }
 
         return existing;
     }

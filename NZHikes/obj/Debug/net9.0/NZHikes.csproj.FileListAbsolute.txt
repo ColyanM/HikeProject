@@ -129,3 +129,4 @@ C:\Users\colya\source\repos\HikingProject\NZHikes\obj\Debug\net9.0\refint\NZHike
 C:\Users\colya\source\repos\HikingProject\NZHikes\obj\Debug\net9.0\NZHikes.pdb
 C:\Users\colya\source\repos\HikingProject\NZHikes\obj\Debug\net9.0\NZHikes.genruntimeconfig.cache
 C:\Users\colya\source\repos\HikingProject\NZHikes\obj\Debug\net9.0\ref\NZHikes.dll
+C:\Users\colya\source\repos\HikingProject\nzhikes\bin\Debug\net9.0\BCrypt.Net-Next.dll
