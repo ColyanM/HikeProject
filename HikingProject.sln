@@ -5,6 +5,8 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NZHikes", "NZHikes\NZHikes.csproj", "{C10E9A1B-AE70-4533-8678-99102E168855}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NZHikes.Tests", "NZHikes.Tests\NZHikes.Tests.csproj", "{81F5EADE-C05A-4DCA-8794-EDDFC47B1B6E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,18 @@ Global
 		{C10E9A1B-AE70-4533-8678-99102E168855}.Release|x64.Build.0 = Release|Any CPU
 		{C10E9A1B-AE70-4533-8678-99102E168855}.Release|x86.ActiveCfg = Release|Any CPU
 		{C10E9A1B-AE70-4533-8678-99102E168855}.Release|x86.Build.0 = Release|Any CPU
+		{81F5EADE-C05A-4DCA-8794-EDDFC47B1B6E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{81F5EADE-C05A-4DCA-8794-EDDFC47B1B6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{81F5EADE-C05A-4DCA-8794-EDDFC47B1B6E}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{81F5EADE-C05A-4DCA-8794-EDDFC47B1B6E}.Debug|x64.Build.0 = Debug|Any CPU
+		{81F5EADE-C05A-4DCA-8794-EDDFC47B1B6E}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{81F5EADE-C05A-4DCA-8794-EDDFC47B1B6E}.Debug|x86.Build.0 = Debug|Any CPU
+		{81F5EADE-C05A-4DCA-8794-EDDFC47B1B6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{81F5EADE-C05A-4DCA-8794-EDDFC47B1B6E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{81F5EADE-C05A-4DCA-8794-EDDFC47B1B6E}.Release|x64.ActiveCfg = Release|Any CPU
+		{81F5EADE-C05A-4DCA-8794-EDDFC47B1B6E}.Release|x64.Build.0 = Release|Any CPU
+		{81F5EADE-C05A-4DCA-8794-EDDFC47B1B6E}.Release|x86.ActiveCfg = Release|Any CPU
+		{81F5EADE-C05A-4DCA-8794-EDDFC47B1B6E}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

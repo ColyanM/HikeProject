@@ -1,15 +1,16 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-
+import { useNavigate } from "react-router-dom";
 
 function Login() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
+  const navigate = useNavigate(); //allows the form to go to completed hikes when logged in
 
 
-//sends form to backend 
+  //sends form to backend 
   async function handleLogin(e) {
     e.preventDefault();
 
@@ -37,6 +38,7 @@ function Login() {
     if (user && (user.id ?? user.Id)) { //used the && because it was letting everyone log in for some reason
       localStorage.setItem("userId", user.id ?? user.Id); //stores so pages know who is logged in
       setMessage("Logged in.");
+      navigate("/stats");
 
     } else {
       setMessage("Invalid login.");
@@ -44,16 +46,25 @@ function Login() {
   }
 
   return (
-    <>
-      <Link to="/"><button>Back to home</button></Link>
+    <div className="center-page">
+      <div className="center-card">
+        <h1>Login to your account</h1>
 
-      <form onSubmit={handleLogin}>
-        <input placeholder="Email" type="email" value={email} onChange={e => setEmail(e.target.value)} />
-        <input placeholder="Password" type="password" value={password} onChange={e => setPassword(e.target.value)} />
+
+        <form onSubmit={handleLogin}>
+          <input placeholder="Email" type="email" value={email} onChange={e => setEmail(e.target.value)} />
+          <input placeholder="Password" type="password" value={password} onChange={e => setPassword(e.target.value)} />
+
+        
+        <div className="form-actions">
+        <Link to="/"><button>Back to home</button></Link>
+
         <button type="submit">Login</button>
         {message && <p>{message}</p>}
-      </form>
-    </>
+        </div>
+        </form>
+      </div>
+    </div>
   );
 
 }

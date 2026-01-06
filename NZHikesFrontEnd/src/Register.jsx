@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function Register() {
 
@@ -6,6 +8,7 @@ function Register() {
   const [createEmail, setCreateEmail] = useState("");
   const [createPassword, setCreatePassword] = useState("");
   const [message, setMessage] = useState("");
+  const navigate = useNavigate(); //allows the form to go back to the home page
 
 
 
@@ -32,21 +35,29 @@ function Register() {
       setCreateName("");
       setCreateEmail("");
       setCreatePassword("");
+      navigate("/");
     } else {
       setMessage("Error creating account.");
     }
   }
   return (
-    <div>
-      <h1>Register for an account</h1>
-      <form onSubmit={handleCreate}>
-        <input placeholder="Name" value={createName} onChange={e => setCreateName(e.target.value)} />
-        <input type="email" placeholder="Email" value={createEmail} onChange={e => setCreateEmail(e.target.value)} />
-        <input type="password" placeholder="Password" value={createPassword} onChange={e => setCreatePassword(e.target.value)} />
-        <button type="submit">Register</button>
-      </form>
-      {message && <p>{message}</p>}
-      {/* displays if there is success o not */}
+    <div className="center-page">
+      <div className="center-card">
+        <h1>Register for an account</h1>
+        <form onSubmit={handleCreate}>
+          <input placeholder="Name" value={createName} onChange={e => setCreateName(e.target.value)} />
+          <input type="email" placeholder="Email" value={createEmail} onChange={e => setCreateEmail(e.target.value)} />
+          <input type="password" placeholder="Password" value={createPassword} onChange={e => setCreatePassword(e.target.value)} />
+
+          <div className="form-actions">
+
+            <Link to="/"><button>Back to home</button></Link>
+            <button type="submit">Register</button>
+          </div>
+        </form>
+        {message && <p>{message}</p>}
+        {/* displays if there is success o not */}
+      </div>
     </div>
   );
 }

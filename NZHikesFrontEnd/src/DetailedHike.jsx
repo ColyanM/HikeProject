@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 
 function DetailedHike() {
@@ -10,6 +11,7 @@ function DetailedHike() {
   const [notes, setNotes] = useState("");
   const userId = localStorage.getItem("userId");
   const isLoggedIn = !!userId;
+  const navigate = useNavigate(); //allows the form to go back to the user page
 
 
 
@@ -22,11 +24,11 @@ function DetailedHike() {
   }, [id]);
   if (!hike) return null; //was crashing on the initial load sometimes
 
-  const handleComplete = (e) => {
+  const handleComplete = async (e) => {
 
     e.preventDefault();
     //sends the hike o the completed hikes 
-    fetch("http://localhost:5071/api/hikes/completed", {
+    const res = await fetch("http://localhost:5071/api/hikes/completed", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -37,13 +39,14 @@ function DetailedHike() {
         notes: notes
       })
     });
+    if (res.ok) {
+      navigate("/stats");
+    }
   };
 
-
   return (
-    <div>
+    <div className="page">
       <h1>{hike.name}
-        <Link to="/"><button>Back to home</button></Link>
 
       </h1>
       <p>Region: {hike.region}</p>
@@ -65,8 +68,13 @@ function DetailedHike() {
               value={notes}
               onChange={e => setNotes(e.target.value)}
             />
-            <button type="submit">Complete</button>
+            <div className="form-actions">
+              <Link to="/"><button>Back to home</button></Link>
+
+              <button type="submit">Complete</button>
+            </div>
           </form>
+
         </>
       ) : (
         <p>Please log in to mark this hike as completed.</p>

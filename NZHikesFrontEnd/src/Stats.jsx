@@ -15,16 +15,8 @@ function Stats() {
 
   useEffect(() => {
     fetch(`http://localhost:5071/api/hikes/users/${userId}/completed-details`)
-      .then(async (res) => {
-        const text = await res.text(); //takes the body as text
-
-        if (!res.ok) throw new Error(text || `HTTP ${res.status}`);
-        if (!text) return [];
-
-        return JSON.parse(text);
-      })
-      .then(data => setHikes(data)) //stores the JSON data
-      .catch(err => console.error("Error fetching completed hikes:", err));
+      .then(res => res.json())
+      .then(setHikes); //sets JSON response
   }, [userId]);
   //longest hike in time
   const longestTime = hikes.reduce((best, h) => (Number(h.minutesTaken) || 0) > (Number(best?.minutesTaken) || 0) ? h : best, null);
@@ -32,6 +24,14 @@ function Stats() {
   const longestDistance = hikes.reduce((best, h) => (Number(h.distance) || 0) > (Number(best?.distance) || 0) ? h : best, null);
   //hike with the most elevation gain
   const longestElevation = hikes.reduce((best, h) => (Number(h.elevationGain) || 0) > (Number(best?.elevationGain) || 0) ? h : best, null);
+
+  // uses Shenandoah's √((Elevation Gain (ft) x 2) x Distance (miles)) to calculate difficulty
+  function calculateScore(distanceKm, elevationMeters) {
+    const elevationFeet = elevationMeters * 3.28084; //need to convert to feet
+    const distanceMiles = distanceKm * 0.621371; //convert to miles
+
+    return Math.sqrt((elevationFeet * 2) * distanceMiles);
+  }
 
   return (
     <div className="page">
@@ -82,6 +82,7 @@ function Stats() {
             <th>Region</th>
             <th>Distance</th>
             <th>Elevation Gain</th>
+            <th>Difficulty Score</th>
             <th>Date</th>
             <th>Minutes</th>
             <th>Notes</th>
@@ -95,6 +96,7 @@ function Stats() {
               <td>{row.region}</td>
               <td>{row.distance}</td>
               <td>{row.elevationGain}</td>
+              <td>{calculateScore(row.distance, row.elevationGain).toFixed(1)}</td>
               <td>{new Date(row.dateCompleted).toLocaleDateString()}</td>
               <td>{row.minutesTaken}</td>
               <td>{row.notes}</td>

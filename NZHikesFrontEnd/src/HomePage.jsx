@@ -16,7 +16,15 @@ function HomePage() {
       .then(data => setHikes(data))
       .catch(err => console.error("Error fetching hikes:", err));
   }, []);
-//UI is conditional on if they are logged in or not
+  // uses Shenandoah's √((Elevation Gain (ft) x 2) x Distance (miles)) to calculate difficulty
+  function calculateScore(distanceKm, elevationMeters) {
+    const elevationFeet = elevationMeters * 3.28084; //need to convert to feet
+    const distanceMiles = distanceKm * 0.621371; //convert to miles
+
+    return Math.sqrt((elevationFeet * 2) * distanceMiles);
+  }
+
+  //UI is conditional on if they are logged in or not
   return (
     <div className="page">
       <div className="header-bar">
@@ -26,7 +34,7 @@ function HomePage() {
         {isLoggedIn ? (
           <>
             <Link to="/stats"><button>My Completed</button></Link>
-            <button onClick={() => {localStorage.removeItem("userId");window.location.reload();}}>Logout</button>
+            <button onClick={() => { localStorage.removeItem("userId"); window.location.reload(); }}>Logout</button>
           </>
         ) : (
           <>
@@ -45,16 +53,20 @@ function HomePage() {
             <th>Region</th>
             <th>Distance</th>
             <th>Elevation Gain</th>
+            <th>Difficulty Score</th>
           </tr>
         </thead>
         <tbody>
           {hikes.map(hike => (
             <tr key={hike.id}>
-              <td><Link to={`/hikes/${hike.id}`}>{hike.name}</Link></td> 
+              <td><Link to={`/hikes/${hike.id}`}>{hike.name}</Link></td>
               {/* Link to navigate to detailed view */}
               <td>{hike.region}</td>
               <td>{hike.distance}</td>
               <td>{hike.elevationGain}</td>
+              <td>{calculateScore(hike.distance, hike.elevationGain).toFixed(1)}</td> 
+              {/* to fixed used for formatting */}
+
             </tr>
           ))}
         </tbody>
