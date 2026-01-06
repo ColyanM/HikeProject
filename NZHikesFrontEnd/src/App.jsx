@@ -4,6 +4,7 @@ import DetailedHike from "./DetailedHike";
 import AddHike from "./AddHike";
 import Register from "./Register";
 import Login from "./Login";
+import Stats from "./Stats";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <Route path="/add-hike" element={<AddHike />} />
       <Route path="/register" element={<Register />} />
       <Route path="/login" element={<Login />} />
+      <Route path="/stats" element={<Stats />} />
     </Routes>
   );
 }

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\colya\\source\\repos\\HikingProject\\nzhikes\\NZHikes.csproj": {}
+    "C:\\Users\\colya\\source\\repos\\HikingProject\\NZHikes\\NZHikes.csproj": {}
   },
   "projects": {
-    "C:\\Users\\colya\\source\\repos\\HikingProject\\nzhikes\\NZHikes.csproj": {
+    "C:\\Users\\colya\\source\\repos\\HikingProject\\NZHikes\\NZHikes.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\colya\\source\\repos\\HikingProject\\nzhikes\\NZHikes.csproj",
+        "projectUniqueName": "C:\\Users\\colya\\source\\repos\\HikingProject\\NZHikes\\NZHikes.csproj",
         "projectName": "NZHikes",
-        "projectPath": "C:\\Users\\colya\\source\\repos\\HikingProject\\nzhikes\\NZHikes.csproj",
+        "projectPath": "C:\\Users\\colya\\source\\repos\\HikingProject\\NZHikes\\NZHikes.csproj",
         "packagesPath": "C:\\Users\\colya\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\colya\\source\\repos\\HikingProject\\nzhikes\\obj\\",
+        "outputPath": "C:\\Users\\colya\\source\\repos\\HikingProject\\NZHikes\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -70,7 +70,7 @@
             },
             "Pomelo.EntityFrameworkCore.MySql": {
               "target": "Package",
-              "version": "[9.0.0, )"
+              "version": "[9.0.10, )"
             }
           },
           "imports": [
