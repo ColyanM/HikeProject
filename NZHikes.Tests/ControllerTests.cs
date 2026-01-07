@@ -8,12 +8,12 @@ public class HikesControllerTests
     //returns all hikes test
     public void GetHikes_Returns_All_Hikes()
     {
-        var options = new DbContextOptionsBuilder<ApplicationDb>()
+        var options = new DbContextOptionsBuilder<ApplicationDb>() //testing DB
             .UseInMemoryDatabase("GetHikes_Returns_All_Hikes")
             .Options;
 
         using var db = new ApplicationDb(options);
-
+        //seeds a hike into db
         db.Hikes.Add(new Hike
         {
             Name = "Test Hike",
@@ -68,7 +68,7 @@ public class HikesControllerTests
         db.Users.Add(new User
         {
             Name = "Test User",
-            Email = "a@a.com",
+            Email = "colyan@yahoo.com",
             Password = "123"
         });
         db.SaveChanges();
@@ -76,11 +76,11 @@ public class HikesControllerTests
         var controller = new HikesController(db);
         var result = controller.Login(new LoginRequest
         {
-            Email = "a@a.com",
+            Email = "colyan@yahoo.com",
             Password = "123"
         });
         Assert.NotNull(result.Value);
-        Assert.Equal("a@a.com", result.Value.Email);
+        Assert.Equal("colyan@yahoo.com", result.Value.Email);
         Assert.True(result.Value.Id > 0);
     }
 
