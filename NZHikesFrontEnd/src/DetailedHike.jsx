@@ -52,6 +52,11 @@ function DetailedHike() {
       <p>Region: {hike.region}</p>
       <p>Distance: {hike.distance} km</p>
       <p>Elevation Gain: {hike.elevationGain} m</p>
+
+      <div className="form-actions">
+        <Link to="/"><button>Back to home</button></Link>
+      </div>
+
       {/* This shouldn't be needed because it doesn't show unless you login but just in case */}
       {isLoggedIn ? (
         <>
@@ -69,15 +74,18 @@ function DetailedHike() {
               onChange={e => setNotes(e.target.value)}
             />
             <div className="form-actions">
-              <Link to="/"><button>Back to home</button></Link>
-
               <button type="submit">Complete</button>
             </div>
           </form>
 
         </>
       ) : (
-        <p>Please log in to mark this hike as completed.</p>
+        <div className="form-actions">
+          <Link to="/login">
+            <button>Login to complete hike</button>
+          </Link>
+        </div>
+
       )}
 
 

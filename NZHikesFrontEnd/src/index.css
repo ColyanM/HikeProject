@@ -117,3 +117,10 @@ thead {
 tbody tr:hover {
     background: gainsboro;
 }
+th {
+  cursor: pointer;
+  user-select: none;
+}
+th:hover {
+  text-decoration: underline;
+}

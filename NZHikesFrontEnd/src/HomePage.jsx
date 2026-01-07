@@ -6,7 +6,17 @@ function HomePage() {
   const [hikes, setHikes] = useState([]);
   const userId = localStorage.getItem("userId");
   const isLoggedIn = !!userId;
+  const [sortKey, setSortKey] = useState("name"); // name used as default
+  const [sortDir, setSortDir] = useState("asc");
 
+  function sortBy(key) { //decides the sort 
+    if (sortKey === key) {
+      setSortDir(sortDir === "asc" ? "desc" : "asc");
+    } else {
+      setSortKey(key);
+      setSortDir("asc");
+    }
+  }
 
 
   //gets all hikes in the hikes DB
@@ -23,6 +33,22 @@ function HomePage() {
 
     return Math.sqrt((elevationFeet * 2) * distanceMiles);
   }
+
+  //sorts the hikes into a new version
+  const sortedHikes = [...hikes].sort((a, b) => {
+    const av = a[sortKey];
+    const bv = b[sortKey];
+
+    if (typeof av === "number" && typeof bv === "number") {
+      return sortDir === "asc" ? av - bv : bv - av;
+    }
+
+    return sortDir === "asc"
+      ? String(av).localeCompare(String(bv))
+      : String(bv).localeCompare(String(av));
+  });
+
+
 
   //UI is conditional on if they are logged in or not
   return (
@@ -49,22 +75,22 @@ function HomePage() {
       <table>
         <thead>
           <tr>
-            <th>Name</th>
-            <th>Region</th>
-            <th>Distance</th>
-            <th>Elevation Gain</th>
-            <th>Difficulty Score</th>
+            <th onClick={() => sortBy("name")}>Name</th>
+            <th onClick={() => sortBy("region")}>Region</th>
+            <th onClick={() => sortBy("distance")}>Distance</th>
+            <th onClick={() => sortBy("elevationGain")}>Elevation Gain</th>
+            <th onClick={() => sortBy("difficultyScore")}>Difficulty Score</th>
           </tr>
         </thead>
         <tbody>
-          {hikes.map(hike => (
+          {sortedHikes.map(hike => (
             <tr key={hike.id}>
               <td><Link to={`/hikes/${hike.id}`}>{hike.name}</Link></td>
               {/* Link to navigate to detailed view */}
               <td>{hike.region}</td>
               <td>{hike.distance}</td>
               <td>{hike.elevationGain}</td>
-              <td>{calculateScore(hike.distance, hike.elevationGain).toFixed(1)}</td> 
+              <td>{calculateScore(hike.distance, hike.elevationGain).toFixed(1)}</td>
               {/* to fixed used for formatting */}
 
             </tr>

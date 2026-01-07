@@ -52,7 +52,7 @@ public class HikesController : ControllerBase
     public ActionResult<User> Login([FromBody] LoginRequest req)
     {
 
-        if(!_db.Users.Any(u => u.Email == req.Email))
+        if (!_db.Users.Any(u => u.Email == req.Email))
         {
             return Unauthorized("Invalid email or password");
         }
@@ -62,7 +62,7 @@ public class HikesController : ControllerBase
             .FirstOrDefault(u => u.Email == req.Email);
 
 
-        if(!BCrypt.Net.BCrypt.Verify(req.Password, existing.Password))
+        if (!BCrypt.Net.BCrypt.Verify(req.Password, existing.Password))
         {
             return Unauthorized("Invalid email or password");
         }

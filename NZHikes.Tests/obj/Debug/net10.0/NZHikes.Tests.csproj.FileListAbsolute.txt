@@ -112,3 +112,5 @@ C:\Users\colya\source\repos\HikingProject\NZHikes.Tests\obj\Debug\net10.0\refint
 C:\Users\colya\source\repos\HikingProject\NZHikes.Tests\obj\Debug\net10.0\NZHikes.Tests.pdb
 C:\Users\colya\source\repos\HikingProject\NZHikes.Tests\obj\Debug\net10.0\NZHikes.Tests.genruntimeconfig.cache
 C:\Users\colya\source\repos\HikingProject\NZHikes.Tests\obj\Debug\net10.0\ref\NZHikes.Tests.dll
+C:\Users\colya\source\repos\HikingProject\NZHikes.Tests\bin\Debug\net10.0\BCrypt.Net-Next.dll
+C:\Users\colya\source\repos\HikingProject\NZHikes.Tests\bin\Debug\net10.0\Microsoft.EntityFrameworkCore.InMemory.dll

@@ -45,6 +45,7 @@ function AddHike() {
     <div className="center-page">
       <div className="center-card">
         <h1>Add New Hike</h1>
+
         <form onSubmit={handleCreate}>
           <input placeholder="Name" value={createName} onChange={e => setCreateName(e.target.value)} />
           <input placeholder="Region" value={createRegion} onChange={e => setCreateRegion(e.target.value)} />

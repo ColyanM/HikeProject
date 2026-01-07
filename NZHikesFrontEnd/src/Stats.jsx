@@ -10,6 +10,17 @@ function Stats() {
   const totalMinutes = hikes.reduce((sum, h) => sum + (Number(h.minutesTaken) || 0), 0);
   const totalDistance = Math.round(hikes.reduce((sum, h) => sum + (Number(h.distance) || 0), 0), 2); //fixed an issue displaying dozens of 0s
   const totalElevation = hikes.reduce((sum, h) => sum + (Number(h.elevationGain) || 0), 0);
+  const [sortKey, setSortKey] = useState("dateCompleted");
+  const [sortDir, setSortDir] = useState("desc");
+
+  function sortBy(key) {
+    if (sortKey === key) {
+      setSortDir(sortDir === "asc" ? "desc" : "asc");
+    } else {
+      setSortKey(key);
+      setSortDir("asc");
+    }
+  }
 
 
 
@@ -32,6 +43,32 @@ function Stats() {
 
     return Math.sqrt((elevationFeet * 2) * distanceMiles);
   }
+
+  const sortedHikes = [...hikes].sort((a, b) => {
+    if (sortKey === "difficulty") {
+      const ad = calculateScore(a.distance, a.elevationGain);
+      const bd = calculateScore(b.distance, b.elevationGain);
+      return sortDir === "asc" ? ad - bd : bd - ad;
+    }
+
+    if (sortKey === "dateCompleted") {
+      const at = new Date(a.dateCompleted).getTime();
+      const bt = new Date(b.dateCompleted).getTime();
+      return sortDir === "asc" ? at - bt : bt - at;
+    }
+
+    const av = a[sortKey];
+    const bv = b[sortKey];
+
+    if (typeof av === "number" && typeof bv === "number") {
+      return sortDir === "asc" ? av - bv : bv - av;
+    }
+
+    return sortDir === "asc"
+      ? String(av).localeCompare(String(bv))
+      : String(bv).localeCompare(String(av));
+  });
+
 
   return (
     <div className="page">
@@ -78,19 +115,19 @@ function Stats() {
       <table>
         <thead>
           <tr>
-            <th>Name</th>
-            <th>Region</th>
-            <th>Distance</th>
-            <th>Elevation Gain</th>
-            <th>Difficulty Score</th>
-            <th>Date</th>
-            <th>Minutes</th>
-            <th>Notes</th>
+            <th onClick={() => sortBy("name")}>Name</th>
+            <th onClick={() => sortBy("region")}>Region</th>
+            <th onClick={() => sortBy("distance")}>Distance</th>
+            <th onClick={() => sortBy("elevationGain")}>Elevation Gain</th>
+            <th onClick={() => sortBy("difficulty")}>Difficulty Score</th>
+            <th onClick={() => sortBy("dateCompleted")}>Date</th>
+            <th onClick={() => sortBy("minutesTaken")}>Minutes</th>
+            <th onClick={() => sortBy("notes")}>Notes</th>
 
           </tr>
         </thead>
         <tbody>
-          {hikes.map(row => (
+          {sortedHikes.map(row => (
             <tr key={row.completedId}>
               <td><Link to={`/hikes/${row.hikeId}`}>{row.name}</Link></td>
               <td>{row.region}</td>
