@@ -17,7 +17,7 @@ public class HikesControllerTests
         db.Hikes.Add(new Hike
         {
             Name = "Test Hike",
-            Region = "North",
+            Region = "Wellington",
             Distance = 10m,
             ElevationGain = 100
         });
@@ -44,7 +44,7 @@ public class HikesControllerTests
         var newHike = new Hike
         {
             Name = "New Hike",
-            Region = "South",
+            Region = "Wellington",
             Distance = 5m,
             ElevationGain = 200
         };
@@ -65,11 +65,14 @@ public class HikesControllerTests
 
         using var db = new ApplicationDb(options);
 
+        var plainPassword = "password";
+        var hashedPassword = BCrypt.Net.BCrypt.HashPassword(plainPassword);
+
         db.Users.Add(new User
         {
             Name = "Test User",
             Email = "colyan@yahoo.com",
-            Password = "123"
+            Password = hashedPassword
         });
         db.SaveChanges();
 
@@ -77,7 +80,7 @@ public class HikesControllerTests
         var result = controller.Login(new LoginRequest
         {
             Email = "colyan@yahoo.com",
-            Password = "123"
+            Password = plainPassword
         });
         Assert.NotNull(result.Value);
         Assert.Equal("colyan@yahoo.com", result.Value.Email);
